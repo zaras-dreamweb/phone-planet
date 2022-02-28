@@ -11,7 +11,7 @@ const loadPhones = () => {
     else {
         fetch(`https://openapi.programming-hero.com/api/phones?search=${inputBoxValue}`)
             .then(res => res.json())
-            .then(data => displayPhones(data.data))
+            .then(data => displayPhones(data.data.slice(0, 20)))
         inputBox.value = '';
         cardContainer.innerText = '';
     }
@@ -39,7 +39,8 @@ const displayPhones = phones => {
 }
 
 const loadPhoneDetails = phoneId => {
-    console.log(phoneId);
+    document.getElementById('single-phone').innerText = '';
+    // console.log(phoneId);
     fetch(`https://openapi.programming-hero.com/api/phone/${phoneId}`)
         .then(res => res.json())
         .then(data => displayPhoneDetails(data.data))
